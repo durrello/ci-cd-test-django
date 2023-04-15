@@ -6,14 +6,14 @@ pipeline {
             steps {
                 echo 'Building..'
                 script {
-                    def dockerImage = docker.build("my-django-app:${env.BUILD_NUMBER}", "-f Dockerfile .")
+                    def dockerImage = docker.build("my-django-app:${env.BUILD_ID}", "-f Dockerfile .")
                 }
             }
         }
         stage('Test') {
             steps {
                 echo 'Testing..'
-                sh 'docker run -d --name my-django-app-${env.BUILD_NUMBER}-container -p 8000:8000 my-django-app:${env.BUILD_NUMBER}'
+                sh 'docker run -d --name my-django-app-${env.BUILD_ID}-container -p 8000:8000 my-django-app:${env.BUILD_ID}'
             }
         }
         stage('Deploy') {
