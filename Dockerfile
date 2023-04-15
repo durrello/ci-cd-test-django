@@ -1,25 +1,28 @@
-# Dockerfile
+# Use an official Python runtime as a parent image
+FROM python:3.8-slim-buster
 
-FROM python:3.9-buster
+# Set environment variables
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
 
-# install nginx
-RUN apt-get update && apt-get install nginx vim -y --no-install-recommends
-COPY nginx.default /etc/nginx/sites-available/default
-RUN ln -sf /dev/stdout /var/log/nginx/access.log \
-    && ln -sf /dev/stderr /var/log/nginx/error.log
+# Install additional packages
+RUN apt-get update && apt-get install -y \
+    curl \
+    gettext \
+    libpq-dev
 
-# copy source and install dependencies
-RUN mkdir -p /opt/app
-RUN mkdir -p /opt/app/website
-COPY requirements.txt start-server.sh /opt/app/
-COPY . /opt/app/website/
-WORKDIR /opt/app/website/
-RUN pip install -r requirements.txt
-RUN python manage.py collectstatic
-RUN python manage.py makemigrations
-RUN python manage.py migrate 
-RUN chown -R www-data:www-data /opt/app
+# Set work directory
+WORKDIR /app
 
-# start server
-EXPOSE 8020
+# Copy files
+COPY requirements.txt /app/
+COPY . /app/
+
+# Install Python dependencies
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Expose port
+EXPOSE 8000
+
+# Run command
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
