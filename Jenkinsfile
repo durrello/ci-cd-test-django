@@ -1,11 +1,13 @@
 pipeline {
-    agent any
+    agent { dockerfile true }
 
     stages {
-        stage('Build') {
+        stage('Build Docker Image') {
             steps {
                 echo 'Building..'
-                
+                script {
+                    def dockerImage = docker.build("my-django-app:${env.BUILD_NUMBER}", "-f Dockerfile .")
+                }
             }
         }
         stage('Test') {
