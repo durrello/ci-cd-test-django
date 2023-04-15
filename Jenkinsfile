@@ -5,6 +5,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building..'
+                
             }
         }
         stage('Test') {
@@ -19,7 +20,7 @@ pipeline {
         }
         stage('Outputs') {
             steps {
-                echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
+                echo "Running build number: ${env.BUILD_ID} on ${env.JENKINS_URL}"
             }
         }
     }
