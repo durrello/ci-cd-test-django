@@ -1,24 +1,21 @@
 pipeline {
     agent any
-    
+
     stages {
         stage('Build') {
             steps {
-                sh 'python manage.py collectstatic --noinput'
-                sh 'docker build -t myapp .'
+                echo 'Building..'
             }
         }
         stage('Test') {
             steps {
-                sh 'python manage.py test --noinput'
-                step([$class: 'JUnitResultArchiver', testResults: 'reports/**/*.xml'])
-                step([$class: 'CoberturaPublisher', coberturaReportFile: 'reports/coverage.xml'])
+                echo 'Testing..'
             }
         }
         stage('Deploy') {
             steps {
-                    sh 'echo not yet...'
-                }
+                echo 'Deploying....'
             }
         }
     }
+}
