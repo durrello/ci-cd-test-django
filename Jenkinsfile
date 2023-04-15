@@ -4,7 +4,6 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'pip install -r requirements.txt'
                 sh 'python manage.py collectstatic --noinput'
                 sh 'docker build -t myapp .'
             }
