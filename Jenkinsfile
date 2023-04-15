@@ -6,7 +6,7 @@ pipeline {
             steps {
                 echo 'Building..'
                 script {
-                    def dockerImage = docker.build("my-django-app:${env.BUILD_ID}", "-f Dockerfile .")
+                    def dockerImage = docker.build("my-django-app", "-f Dockerfile .")
                 }
             }
         }
