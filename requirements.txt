@@ -1,1 +1,8 @@
 Django==2.1.15
+django-countries
+django-crispy-forms
+django-allauth
+stripe
+Pillow
+gunicorn
+psycopg2-binary
