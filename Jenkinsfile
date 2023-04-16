@@ -13,7 +13,7 @@ pipeline {
         stage('Test') {
             steps {
                 echo 'Testing..'
-                sh "docker run -d --name my-django-app-container-${env.BUILD_ID} -p 8000:81 my-django-app:${env.BUILD_ID}"
+                sh "docker run -d --name my-django-app-container-${env.BUILD_ID} -p 8000:80 my-django-app:${env.BUILD_ID}"
             }
         }
         stage('Deploy') {
@@ -23,7 +23,7 @@ pipeline {
         }
         stage('Outputs') {
             steps {
-                echo "Running build number: ${env.BUILD_ID} on ${env.JENKINS_URL}:81"
+                echo "Running build number: ${env.BUILD_ID} on ${env.JENKINS_URL}"
             }
         }
     }
