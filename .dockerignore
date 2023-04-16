@@ -1,5 +1,5 @@
 # Ignore Dockerfile file
 Dockerfile
 
-# Ignoring the virtual environment 
+# Ignoring the virtual environment
 venv
