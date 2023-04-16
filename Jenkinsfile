@@ -13,7 +13,7 @@ pipeline {
         stage('Test') {
             steps {
                 echo 'Testing..'
-                sh 'docker run -d --name my-django-app-container -p 8000:81 my-django-app'
+                sh 'docker run -d --name my-django-app-container${env.BUILD_ID} -p 8000:81 my-django-app'
             }
         }
         stage('Deploy') {
