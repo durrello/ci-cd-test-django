@@ -24,4 +24,5 @@ RUN chown -R www-data:www-data /opt/app
 EXPOSE 8020
 STOPSIGNAL SIGTERM
 RUN chmod +x start-server.sh
+RUN chmod 755 start-server.sh
 CMD ["/opt/app/start-server.sh"]
