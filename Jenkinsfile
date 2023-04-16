@@ -23,7 +23,7 @@ pipeline {
         }
         stage('Outputs') {
             steps {
-                echo "Running build number: ${env.BUILD_ID} on ${env.JENKINS_URL}"
+                echo "Running build number: ${env.BUILD_ID} on ${env.JENKINS_URL} port 80"
             }
         }
     }
